@@ -177,7 +177,7 @@ body{
     object-fit: cover;
 }
 
-.vote-icon {
+.score-icon {
     width: 30px;
     height: 30px;
     background-color: var(--secondary);
@@ -191,7 +191,7 @@ body{
     margin: 10px 0;
 }
 
-.vote-count {
+.score-count {
     font-size: 20px;
     font-weight: bold;
     margin: 10px 0;
