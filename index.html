@@ -7,6 +7,7 @@
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="/public/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="main">  
@@ -33,13 +34,25 @@
             </div>
             <!-- Players -->
             <div class="profile-score-container">
-                <div class="profile-score">
-                    <img src="" alt="player 1">
-                    
+                <div class="profile">
+                    <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="player1">
+                    <div class="vote-icon purple-icon">⭘</div>
+                    <div class="vote-count">3</div>
+                    <div class="name">Player 1</div>
+                </div>
+        
+                <div class="profile">
+                    <img src="https://randomuser.me/api/portraits/men/16.jpg" alt="player2">
+                    <div class="vote-icon blue-icon">✖</div>
+                    <div class="vote-count">1</div>
+                    <div class="name">Player 2</div>
                 </div>
             </div>
               <!-- REset -->
-            <button class="reset-button box-shadow">Reset</button>
+            <button class="reset-button box-shadow">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>Reset</span>
+            </button>
         </div>
     </aside>
     <script src="./index.js"></script>
