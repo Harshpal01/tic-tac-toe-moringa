@@ -7,11 +7,12 @@
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="/public/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="main">  
         <div id="board" class="board">
-            <div class="tile1 tile-card box-shadow" id="tile1">d</div>
+            <div class="tile1 tile-card box-shadow" id="tile1"></div>
             <div class="tile2 tile-card box-shadow" id="tile2"></div>
             <div class="tile3 tile-card box-shadow" id="tile3"></div>
             <div class="tile4 tile-card box-shadow" id="tile4"></div>
@@ -27,21 +28,36 @@
             <h1 class="title">Tic Tac Toe</h1>
             <!-- Turn taking timer -->
             <div class="timer">
-                <span id="minute">02</span>
+                <span id="minute"></span>
                 <span>:</span>
-                <span id="seconds">43</span>
+                <span id="seconds"></span>
             </div>
             <!-- Players -->
             <div class="profile-score-container">
-                <div class="profile-score">
-                    <img src="" alt="player 1">
-                    
+                <div class="profile">
+                    <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="player1">
+                    <div class="score-icon blue-icon">✖</div>
+                    <div class="score-count" id="player1">0</div>
+                    <div class="name">Player 1</div>
+                </div>
+        
+                <div class="profile">
+                    <img src="https://randomuser.me/api/portraits/men/16.jpg" alt="player2">
+                    <div class="score-icon purple-icon">⭘</div>
+                    <div class="score-count" id="player2">0</div>
+                    <div class="name">Player 2</div>
                 </div>
             </div>
               <!-- REset -->
-            <button class="reset-button box-shadow">Reset</button>
+            <button class="reset-button box-shadow">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>Reset</span>
+            </button>
         </div>
     </aside>
-    <script src="index.js"></script>
+    <dialog id="dialog">
+        this is a dialog
+    </dialog>
+    <script src="./index.js"></script>
 </body>
 </html>
