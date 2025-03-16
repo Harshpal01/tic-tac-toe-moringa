@@ -3,6 +3,8 @@ const tiles =  document.querySelectorAll('.tile-card');
 const resetBtn =  document.querySelector('.reset-button');
 const dialog = document.getElementById('dialog');
 
+const minuteDisplay = document.getElementById("minute");
+const secondDisplay = document.getElementById("seconds");
 
 let options = ['', '', '', '', '', '', '', '', ''];
 
@@ -21,14 +23,41 @@ const players = {
 
 let currentPlayer = players["player1"];
 let running = false;
-
+let timeLeft = 10;  // 10 seconds per turn
+let timer;
 //initialize game
 initializeGame();
 
 function initializeGame(){
     tiles.forEach(tile => tile.addEventListener('click',tileClicked));
     running =true;
+    startTimer();  // Start the timer when the game starts
 };
+  
+function startTimer() {
+    clearInterval(timer);
+    timeLeft = 10; // Reset timer
+    updateTimerDisplay();
+
+    timer = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            alert(`Time's up! ${currentPlayer.name} loses the turn.`);
+            changePlayer();
+            startTimer(); // Restart for next player
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    minuteDisplay.textContent = String(minutes).padStart(2, '0');
+    secondDisplay.textContent = String(seconds).padStart(2, '0');
+}
 
 function tileClicked(){
     console.log('clicked',this);
@@ -50,6 +79,7 @@ function tileClicked(){
     updateOptions(currentPlayer["play"],tileIndex-1)
     checkWinner();
     changePlayer();
+    startTimer();
 }
 
 function updateOptions(play, index){
@@ -73,6 +103,7 @@ function checkWinner() {
     for (const condition of winConditions) {
         const [a, b, c] = condition; 
         if (options[a] !== '' && options[a] === options[b] && options[b] === options[c]) {
+            clearInterval(timer);
             alert(`${currentPlayer.name} wins!`);
             // running = false;
             dialog.showModal();
@@ -82,10 +113,31 @@ function checkWinner() {
         }
     }
     if (!options.includes('')) {
+        clearInterval(timer);
         alert('Draw!');
         running = false;
     }
 }
+function resetGame() {
+    clearInterval(timer);
+    options = ['', '', '', '', '', '', '', '', ''];
+    tiles.forEach(tile => {
+        const span = tile.querySelector("span");
+        span?.remove();
+    });
+
+    players["player1"].score = 0;
+    players["player2"].score = 0;
+
+    document.querySelectorAll(".score-count")[0].textContent = "0";
+    document.querySelectorAll(".score-count")[1].textContent = "0";
+
+
+    currentPlayer = players["player1"];
+    running = true;
+    startTimer();
+}
+
 function clearBoard(){
     // clear options
 
