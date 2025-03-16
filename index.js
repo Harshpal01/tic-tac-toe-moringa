@@ -1,5 +1,6 @@
-const tiles = document.querySelectorAll('.tile-card');
-const resetBtn = document.querySelector('.reset-button');
+// function of countdown
+const tiles =  document.querySelectorAll('.tile-card');
+const resetBtn =  document.querySelector('.reset-button');
 const dialog = document.getElementById('dialog');
 
 const minuteDisplay = document.getElementById("minute");
@@ -8,15 +9,15 @@ const secondDisplay = document.getElementById("seconds");
 let options = ['', '', '', '', '', '', '', '', ''];
 
 const players = {
-    "player1": {
+    "player1" : {
         name: "player1",
         play: "X",
         score: 0
     },
-    "player2": {
+    "player2" : {
         name: "player2",
         play: "O",
-        score: 0
+        score: 0 
     }
 };
 
@@ -24,16 +25,15 @@ let currentPlayer = players["player1"];
 let running = false;
 let timeLeft = 10;  // 10 seconds per turn
 let timer;
-
+//initialize game
 initializeGame();
 
-function initializeGame() {
-    tiles.forEach(tile => tile.addEventListener('click', tileClicked));
-    resetBtn.addEventListener("click", resetGame);
-    running = true;
+function initializeGame(){
+    tiles.forEach(tile => tile.addEventListener('click',tileClicked));
+    running =true;
     startTimer();  // Start the timer when the game starts
-}
-
+};
+  
 function startTimer() {
     clearInterval(timer);
     timeLeft = 10; // Reset timer
@@ -59,29 +59,38 @@ function updateTimerDisplay() {
     secondDisplay.textContent = String(seconds).padStart(2, '0');
 }
 
-function tileClicked() {
-    if (this.querySelector('span')) {
-        return console.log('Tile already occupied');
-    }
+function tileClicked(){
+    console.log('clicked',this);
 
-    const spanElement = document.createElement("span");
+    // know when to put O and when to put X; [done]
+    // We need to know players Turn and Allocation [done]
+    // secure the fields
+    if(this.querySelector('span')){
+        return console.log('exists')
+    }
+    const spanElement = document.createElement("span"); //  <div><span>X</span></div>
     spanElement.textContent = currentPlayer["play"];
     this.appendChild(spanElement);
-
-    let tileIndex = this.getAttribute('id').split("").pop();
-    updateOptions(currentPlayer["play"], tileIndex - 1);
+    // update played options
+    // get the index of tile and push option in options object e.g ['x','O','x'] 0, 1,2
+    let tileIndex = this.getAttribute('id').split(""); // tile1 -> split word -> ['t',..'1']
+    tileIndex = tileIndex[tileIndex?.length - 1];
+    console.log(tileIndex[tileIndex?.length - 1])
+    updateOptions(currentPlayer["play"],tileIndex-1)
     checkWinner();
     changePlayer();
-    startTimer();  // Restart timer when a player makes a move
+    startTimer();
 }
 
-function updateOptions(play, index) {
-    options[index] = play;
+function updateOptions(play, index){
+    options[index] = play; 
 }
 
-function changePlayer() {
-    currentPlayer = (currentPlayer["play"] === 'X') ? players["player2"] : players["player1"];
-    console.log(`${currentPlayer.name} is next`);
+function changePlayer(){
+    console.log(players)
+    //switch between x and o
+    currentPlayer = (currentPlayer["play"] === 'X')? players["player2"]: players["player1"];
+    console.log("player switch",currentPlayer["name"]+ " " +"is next")
 }
 
 function checkWinner() {
@@ -92,48 +101,23 @@ function checkWinner() {
     ];
 
     for (const condition of winConditions) {
-        const [a, b, c] = condition;
+        const [a, b, c] = condition; 
         if (options[a] !== '' && options[a] === options[b] && options[b] === options[c]) {
             clearInterval(timer);
             alert(`${currentPlayer.name} wins!`);
+            // running = false;
             dialog.showModal();
-            updateScore(currentPlayer.name, 1);
+            UpdateScore(currentPlayer.name, 1)
             clearBoard();
             return;
         }
     }
-
     if (!options.includes('')) {
         clearInterval(timer);
         alert('Draw!');
         running = false;
     }
 }
-
-function clearBoard() {
-    options = ['', '', '', '', '', '', '', '', ''];
-    tiles.forEach(tile => {
-        const span = tile.querySelector("span");
-        span?.remove();
-    });
-}
-
-function updateScore(playerName, point) {
-    console.log(`Updating score for ${playerName}, adding ${point} point`); // Debug log
-
-    // Increase player score
-    players[playerName]["score"] += point;
-
-    // Get all score elements
-    const scoreElements = document.querySelectorAll(".vote-count");
-
-    if (playerName === "player1") {
-        scoreElements[0].textContent = players["player1"]["score"];
-    } else {
-        scoreElements[1].textContent = players["player2"]["score"];
-    }
-}
-
 function resetGame() {
     clearInterval(timer);
     options = ['', '', '', '', '', '', '', '', ''];
@@ -145,11 +129,30 @@ function resetGame() {
     players["player1"].score = 0;
     players["player2"].score = 0;
 
-    document.querySelectorAll(".vote-count")[0].textContent = "0";
-    document.querySelectorAll(".vote-count")[1].textContent = "0";
+    document.querySelectorAll(".score-count")[0].textContent = "0";
+    document.querySelectorAll(".score-count")[1].textContent = "0";
 
 
     currentPlayer = players["player1"];
     running = true;
     startTimer();
+}
+
+function clearBoard(){
+    // clear options
+
+    options = ['', '', '', '', '', '', '', '', ''];    
+    // clear tiles
+    for(let tile of tiles){
+        const span = tile?.querySelector("span") // <div><span>X</span></div> -> <div></div>
+        span?.remove()
+    }
+}
+
+function UpdateScore(playerName,point){
+    players[playerName]["score"] += point;
+    // update player scores in html
+    for(let player in players){
+        document.getElementById(player).textContent = players[player]["score"]
+    }
 }
