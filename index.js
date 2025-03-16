@@ -1,4 +1,3 @@
-
 // function of countdown
 const tiles =  document.querySelectorAll('.tile-card');
 const resetBtn =  document.querySelector('.reset-button');
@@ -8,6 +7,7 @@ const minuteDisplay = document.getElementById("minute");
 const secondDisplay = document.getElementById("seconds");
 
 document.querySelector(".reset-button").addEventListener("click", resetGame);
+
 let options = ['', '', '', '', '', '', '', '', ''];
 
 const players = {
@@ -158,3 +158,16 @@ function UpdateScore(playerName,point){
         document.getElementById(player).textContent = players[player]["score"]
     }
 }
+
+/*
+// Function to clear only the tiles
+function clearTiles() {
+    const tiles = document.querySelectorAll('.tile-card');
+    tiles.forEach(tile => {
+      tile.textContent = "";
+});
+}
+  
+  document.querySelector(".reset-button").addEventListener("click", clearTiles);
+  */
+
