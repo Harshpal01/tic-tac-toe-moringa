@@ -1,3 +1,4 @@
+
 // function of countdown
 const tiles =  document.querySelectorAll('.tile-card');
 const resetBtn =  document.querySelector('.reset-button');
@@ -6,6 +7,7 @@ const dialog = document.getElementById('dialog');
 const minuteDisplay = document.getElementById("minute");
 const secondDisplay = document.getElementById("seconds");
 
+document.querySelector(".reset-button").addEventListener("click", resetGame);
 let options = ['', '', '', '', '', '', '', '', ''];
 
 const players = {
