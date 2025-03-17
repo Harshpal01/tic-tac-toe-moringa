@@ -134,9 +134,11 @@ body{
 .timer span{
     margin: 0px 10px;
 }
+.hidden{
+    display: none;
+}
 
-.reset-button{
-    background-color: var(--primary);
+.btn{
     padding: 10px;
     border: none;
     border-radius: 16px;
@@ -144,9 +146,19 @@ body{
     width: 100%;
     font-weight: bolder;
     font-size: large;
-    margin: 20px 0px;
+    margin: 5px 0px;
     outline: none;
     cursor: pointer;
+}
+
+.reset-button{
+    background-color: var(--primary);
+}
+.start-button{
+    background-color: var(--secondary);
+}
+.end-button{
+    background-color: rgb(240, 91, 91);
 }
 
 .profile-score-container {
@@ -207,3 +219,23 @@ body{
 .purple-icon { background-color: var(--primary); }
 
 .blue-icon { background-color: var(--secondary); }
+
+.dialog-body{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 20px;
+    background-color: var(--dar);
+    border: none;
+}
+.dialog-container{
+    background-color: var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    font-size: medium;
+    border-radius: 10px;
+    padding: 10px;
+}
+.dialog-container span{
+    margin: 0px 5px;
+}
