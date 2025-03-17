@@ -28,9 +28,9 @@
             <h1 class="title">Tic Tac Toe</h1>
             <!-- Turn taking timer -->
             <div class="timer">
-                <span id="minute"></span>
+                <span id="minute">00</span>
                 <span>:</span>
-                <span id="seconds"></span>
+                <span id="seconds">00</span>
             </div>
             <!-- Players -->
             <div class="profile-score-container">
@@ -49,15 +49,20 @@
                 </div>
             </div>
               <!-- REset -->
-            <button class="reset-button box-shadow">
+            <button class="btn start-button box-shadow">
+                <span>Start Game</span>
+            </button>
+            <button class="btn reset-button box-shadow hidden">
                 <i class="fa-solid fa-rotate-right"></i>
-                <span>Reset</span>
+                <span>Reset Game</span>
+            </button>
+            <button class="btn end-button box-shadow hidden">
+                <i class="fa-solid fa-xmark"></i>
+                <span>End Game</span>
             </button>
         </div>
     </aside>
-    <dialog id="dialog">
-        this is a dialog
-    </dialog>
+    <dialog id="dialog" class="dialog-body"></dialog>
     <script src="./index.js"></script>
 </body>
 </html>
